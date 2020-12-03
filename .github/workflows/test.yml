@@ -14,7 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: Swatinem/rust-cache@v1
-      - run: sudo apt-get update; sudo apt-get install -y libspeechd-dev
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y libspeechd-dev pkg-config libx11-dev libasound2-dev libudev-dev
         if: ${{ runner.os == 'Linux' }}
       - uses: actions-rs/toolchain@v1
         with:
@@ -34,29 +36,3 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --all-features
-
-  check_web:
-    name: Check Web
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: Swatinem/rust-cache@v1
-      - uses: actions-rs/toolchain@v1
-        with:
-          target: wasm32-unknown-unknown
-          profile: minimal
-          toolchain: stable
-          components: rustfmt, clippy
-          override: true
-      - uses: actions-rs/cargo@v1
-        with:
-          command: check
-          args: --all-features --examples --target wasm32-unknown-unknown
-      - uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --all -- --check
-      - uses: actions-rs/clippy-check@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: --all-features --target wasm32-unknown-unknown
