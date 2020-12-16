@@ -5,10 +5,10 @@ fn main() {
     App::build()
         .add_plugins(DefaultPlugins)
         .add_plugin(bevy_tts::TtsPlugin)
-        .add_system(bevy::input::system::exit_on_esc_system)
-        .add_startup_system(setup)
-        .add_system(event_poll)
-        .add_system(greet)
+        .add_system(bevy::input::system::exit_on_esc_system.system())
+        .add_startup_system(setup.system())
+        .add_system(event_poll.system())
+        .add_system(greet.system())
         .run();
 }
 
