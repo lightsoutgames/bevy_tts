@@ -12,7 +12,7 @@ pub enum TtsEvent {
 
 struct TtsChannel(Receiver<TtsEvent>);
 
-fn poll_callbacks_system(_: &mut World, resources: &mut Resources) {
+fn poll_callbacks(_: &mut World, resources: &mut Resources) {
     let channel = resources.get_thread_local::<TtsChannel>().unwrap();
     if let Ok(msg) = channel.0.try_recv() {
         let mut events = resources.get_mut::<Events<TtsEvent>>().unwrap();
@@ -50,6 +50,6 @@ impl Plugin for TtsPlugin {
         app.add_event::<TtsEvent>()
             .add_thread_local_resource(TtsChannel(rx))
             .add_resource(tts)
-            .add_system(poll_callbacks_system);
+            .add_system(poll_callbacks.system());
     }
 }
