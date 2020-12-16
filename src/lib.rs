@@ -1,7 +1,7 @@
 use std::sync::mpsc::{channel, Receiver};
 
 use bevy::prelude::*;
-pub use tts::{Features, UtteranceId, TTS};
+pub use tts::{Error, Features, UtteranceId, TTS};
 
 #[derive(Clone, Copy, Debug)]
 pub enum TtsEvent {
