@@ -11,4 +11,4 @@ use_tolk = ["tts/use_tolk"]
 
 [dependencies]
 bevy = "0.4"
-tts = { version = "0.12", features = ["use_tolk"] }
+tts = { version = "0.13", features = ["use_tolk"] }
