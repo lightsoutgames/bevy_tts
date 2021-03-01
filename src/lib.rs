@@ -1,6 +1,5 @@
-use std::sync::mpsc::{channel, Receiver};
-
 use bevy::prelude::*;
+use crossbeam_channel::{unbounded, Receiver};
 pub use tts::{Error, Features, UtteranceId, TTS};
 
 #[derive(Clone, Copy, Debug)]
@@ -12,10 +11,8 @@ pub enum TtsEvent {
 
 struct TtsChannel(Receiver<TtsEvent>);
 
-fn poll_callbacks(_: &mut World, resources: &mut Resources) {
-    let channel = resources.get_thread_local::<TtsChannel>().unwrap();
+fn poll_callbacks(channel: Res<TtsChannel>, mut events: ResMut<Events<TtsEvent>>) {
     if let Ok(msg) = channel.0.try_recv() {
-        let mut events = resources.get_mut::<Events<TtsEvent>>().unwrap();
         events.send(msg);
     }
 }
@@ -25,7 +22,7 @@ pub struct TtsPlugin;
 impl Plugin for TtsPlugin {
     fn build(&self, app: &mut AppBuilder) {
         let tts = TTS::default().unwrap();
-        let (tx, rx) = channel();
+        let (tx, rx) = unbounded();
         let tx_begin = tx.clone();
         let tx_end = tx.clone();
         let tx_stop = tx;
@@ -48,8 +45,8 @@ impl Plugin for TtsPlugin {
             .unwrap();
         }
         app.add_event::<TtsEvent>()
-            .add_thread_local_resource(TtsChannel(rx))
-            .add_resource(tts)
+            .insert_resource(TtsChannel(rx))
+            .insert_resource(tts)
             .add_system(poll_callbacks.system());
     }
 }

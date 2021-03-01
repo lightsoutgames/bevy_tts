@@ -63,11 +63,8 @@ fn setup(mut tts: ResMut<TTS>) {
 }
 
 // Reports events from TTS subsystem.
-fn event_poll(
-    mut tts_event_reader: Local<EventReader<TtsEvent>>,
-    tts_events: Res<Events<TtsEvent>>,
-) {
-    for event in tts_event_reader.iter(&tts_events) {
+fn event_poll(mut events: EventReader<TtsEvent>) {
+    for event in events.iter() {
         println!("{:?}", event);
     }
 }
