@@ -11,7 +11,7 @@ pub enum TtsEvent {
 
 struct TtsChannel(Receiver<TtsEvent>);
 
-fn poll_callbacks(channel: Res<TtsChannel>, mut events: ResMut<Events<TtsEvent>>) {
+fn poll_callbacks(channel: Res<TtsChannel>, mut events: EventWriter<TtsEvent>) {
     if let Ok(msg) = channel.0.try_recv() {
         events.send(msg);
     }
