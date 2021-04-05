@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 use crossbeam_channel::{unbounded, Receiver};
-pub use tts::{Error, Features, UtteranceId, TTS};
+pub use tts::{Error, Features, UtteranceId, Tts};
 
 #[derive(Clone, Copy, Debug)]
 pub enum TtsEvent {
@@ -21,7 +21,7 @@ pub struct TtsPlugin;
 
 impl Plugin for TtsPlugin {
     fn build(&self, app: &mut AppBuilder) {
-        let tts = TTS::default().unwrap();
+        let tts = Tts::default().unwrap();
         let (tx, rx) = unbounded();
         let tx_begin = tx.clone();
         let tx_end = tx.clone();
