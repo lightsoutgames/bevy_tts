@@ -13,7 +13,7 @@ fn main() {
 }
 
 // Speaks a bunch of messages and changes TTS properties.
-fn setup(mut tts: ResMut<TTS>) {
+fn setup(mut tts: ResMut<Tts>) {
     tts.speak("Hello, world.", false).unwrap();
     let Features { rate, .. } = tts.supported_features();
     if rate {
@@ -70,7 +70,7 @@ fn event_poll(mut events: EventReader<TtsEvent>) {
 }
 
 // Shows how to output speech in response to a keypress.
-fn greet(input: Res<Input<KeyCode>>, mut tts: ResMut<TTS>) {
+fn greet(input: Res<Input<KeyCode>>, mut tts: ResMut<Tts>) {
     if input.just_pressed(KeyCode::G) {
         tts.speak("Hey there!", true).unwrap();
     }
