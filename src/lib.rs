@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 use crossbeam_channel::{unbounded, Receiver};
-pub use tts::{Error, Features, UtteranceId, Tts};
+pub use tts::{Error, Features, Tts, UtteranceId};
 
 #[derive(Clone, Copy, Debug)]
 pub enum TtsEvent {
