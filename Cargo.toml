@@ -11,9 +11,9 @@ default = ["tolk"]
 tolk = ["tts/tolk"]
 
 [dependencies]
-bevy = { git = "https://github.com/bevyengine/bevy", branch = "main", default-features = false }
+bevy = { version = "0.5", default-features = false }
 crossbeam-channel = "0.5"
 tts = "0.16"
 
 [dev-dependencies]
-bevy = { git = "https://github.com/bevyengine/bevy", branch = "main", default-features = true }
+bevy = { version = "0.5", default-features = true }
