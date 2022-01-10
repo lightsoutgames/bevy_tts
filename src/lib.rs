@@ -20,7 +20,7 @@ fn poll_callbacks(channel: Res<TtsChannel>, mut events: EventWriter<TtsEvent>) {
 pub struct TtsPlugin;
 
 impl Plugin for TtsPlugin {
-    fn build(&self, app: &mut AppBuilder) {
+    fn build(&self, app: &mut App) {
         let tts = Tts::default().unwrap();
         let (tx, rx) = unbounded();
         let tx_begin = tx.clone();
@@ -47,6 +47,6 @@ impl Plugin for TtsPlugin {
         app.add_event::<TtsEvent>()
             .insert_resource(TtsChannel(rx))
             .insert_resource(tts)
-            .add_system(poll_callbacks.system());
+            .add_system(poll_callbacks);
     }
 }
