@@ -42,13 +42,9 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --all-features
-      - uses: actions-rs/cargo@v1
-        with:
-          command: check
-          args: --all-features --examples
         if: ${{ runner.os != 'Linux' }}
-      - uses: actions-rs/cargo@v1
+      - uses: actions-rs/clippy-check@v1
         with:
-          command: check
-          args: --no-default-features --examples
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --no-default-features
         if: ${{ runner.os == 'Linux' }}
