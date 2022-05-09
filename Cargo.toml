@@ -15,7 +15,7 @@ tolk = ["tts/tolk"]
 [dependencies]
 bevy = { version = "0.7", default-features = false }
 crossbeam-channel = "0.5"
-tts = { version = "0.21", default-features = false }
+tts = { version = "0.22", default-features = false }
 
 [dev-dependencies]
 bevy = { version = "0.7", default-features = true }
