@@ -5,7 +5,7 @@ fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
         .add_plugin(bevy_tts::TtsPlugin)
-        .add_system(bevy::input::system::exit_on_esc_system)
+        .add_system(bevy::window::close_on_esc)
         .add_startup_system(setup)
         .add_system(event_poll)
         .add_system(greet)
