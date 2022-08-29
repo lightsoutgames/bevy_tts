@@ -10,14 +10,15 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [features]
-default = ["speech_dispatcher_0_10", "tolk"]
+default = ["speech_dispatcher_0_10_2", "tolk"]
 speech_dispatcher_0_10 = ["tts/speech_dispatcher_0_10"]
+speech_dispatcher_0_10_2 = ["tts/speech_dispatcher_0_10_2"]
 tolk = ["tts/tolk"]
 
 [dependencies]
 bevy = { version = "0.8", default-features = false }
 crossbeam-channel = "0.5"
-tts = { version = "0.23", default-features = false }
+tts = { version = "0.23.1", default-features = false }
 
 [dev-dependencies]
 bevy = { version = "0.8", default-features = true }
