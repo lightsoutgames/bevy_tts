@@ -1,0 +1,42 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: test
+    image: rust
+    commands:
+      - rustup component add clippy rustfmt
+      - cargo fmt --check
+      - cargo build --all
+      - cargo build --examples --all
+      - cargo test --all
+      - cargo clippy
+  - name: release
+    image: rust
+    commands:
+      - cargo install -f git-cliff
+      - git-cliff --output CHANGELOG.md
+      - cargo publish --allow-dirty
+    when:
+      event:
+        - tag
+    environment:
+      CARGO_REGISTRY_TOKEN:
+        from_secret: cargo_registry_token
+  - name: discord notification
+    image: appleboy/drone-discord
+    when:
+      status: [success, failure]
+    settings:
+      webhook_id:
+        from_secret: discord_webhook_id
+      webhook_token:
+        from_secret: discord_webhook_token
+      tts: true
+      message: >
+        {{#success build.status}}
+          {{repo.name}} build {{build.number}} succeeded: <{{build.link}}>
+        {{else}}
+          {{repo.name}} build {{build.number}} failed: <{{build.link}}>
+        {{/success}}
