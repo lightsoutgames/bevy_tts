@@ -17,12 +17,10 @@ steps:
   - name: release
     image: rust
     commands:
-      - cargo install -f git-cliff
-      - git-cliff --output CHANGELOG.md
-      - cargo publish --allow-dirty
+      - cargo publish
     when:
-      event:
-        - tag
+      ref:
+        - refs/tags/v*
     environment:
       CARGO_REGISTRY_TOKEN:
         from_secret: cargo_registry_token
