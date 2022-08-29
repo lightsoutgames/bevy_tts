@@ -2,7 +2,7 @@
 name = "bevy_tts"
 description = "Text-to-speech for the Bevy game engine"
 repository = "https://labs.lightsout.games/projects/bevy_tts"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Nolan Darilek <nolan@thewordnerd.info>"]
 license = "MIT OR Apache-2.0"
 edition = "2021"
