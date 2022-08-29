@@ -5,6 +5,7 @@ name: default
 steps:
   - name: test
     image: rust:bullseye
+    pull: always
     commands:
       - rustup component add clippy rustfmt
       - apt-get update -qq
