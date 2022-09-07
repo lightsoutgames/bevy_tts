@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Version 0.1.2 - 2022-09-07
+
+### Miscellaneous Tasks
+
+- Update tts dependency.
+
 ## Version 0.1.1 - 2022-08-29
 
 ### Miscellaneous Tasks
