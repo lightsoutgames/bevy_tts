@@ -10,14 +10,14 @@ steps:
       - apt-get update -qq
       - apt-get install -qqy llvm-dev libclang-dev clang libspeechd-dev pkg-config libx11-dev libasound2-dev libudev-dev libxcb-xfixes0-dev libwayland-dev libxkbcommon-dev libvulkan-dev libpulse-dev
       - cargo fmt --check
-      - cargo test
+      - cargo test --no-default-features --features=speech_dispatcher_0_10
       - cargo clippy
   - name: release
     image: rust
     commands:
       - apt-get update -qq
       - apt-get install -qqy llvm-dev libclang-dev clang libspeechd-dev pkg-config libx11-dev libasound2-dev libudev-dev libxcb-xfixes0-dev libwayland-dev libxkbcommon-dev libvulkan-dev libpulse-dev
-      - cargo publish
+      - cargo publish --no-default-features --features=speech_dispatcher_0_10
     when:
       ref:
         - refs/tags/v*

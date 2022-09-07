@@ -1,8 +1,8 @@
 [package]
 name = "bevy_tts"
+version = "0.1.2"
 description = "Text-to-speech for the Bevy game engine"
 repository = "https://labs.lightsout.games/projects/bevy_tts"
-version = "0.1.1"
 authors = ["Nolan Darilek <nolan@thewordnerd.info>"]
 license = "MIT OR Apache-2.0"
 edition = "2021"
@@ -10,15 +10,15 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [features]
-default = ["speech_dispatcher_0_10_2", "tolk"]
+default = ["speech_dispatcher_0_11", "tolk"]
 speech_dispatcher_0_10 = ["tts/speech_dispatcher_0_10"]
-speech_dispatcher_0_10_2 = ["tts/speech_dispatcher_0_10_2"]
+speech_dispatcher_0_11 = ["tts/speech_dispatcher_0_11"]
 tolk = ["tts/tolk"]
 
 [dependencies]
 bevy = { version = "0.8", default-features = false }
 crossbeam-channel = "0.5"
-tts = { version = "0.23.1", default-features = false }
+tts = { version = "0.24", default-features = false }
 
 [dev-dependencies]
 bevy = { version = "0.8", default-features = true }
