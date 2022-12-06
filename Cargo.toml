@@ -25,7 +25,7 @@ tts = { version = "0.25", default-features = false }
 bevy = { version = "0.9", default-features = true }
 
 [package.metadata.release]
-tag-prefix = ""
 publish = false
 push = false
 pre-release-hook = ["git-cliff", "-o", "CHANGELOG.md", "--tag", "{{version}}"]
+pre-release-commit-message = "Release"
