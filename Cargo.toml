@@ -11,17 +11,18 @@ edition = "2021"
 
 [features]
 default = ["speech_dispatcher_0_11", "tolk"]
+speech_dispatcher_0_9 = ["tts/speech_dispatcher_0_9"]
 speech_dispatcher_0_10 = ["tts/speech_dispatcher_0_10"]
 speech_dispatcher_0_11 = ["tts/speech_dispatcher_0_11"]
 tolk = ["tts/tolk"]
 
 [dependencies]
-bevy = { version = "0.8", default-features = false }
+bevy = { version = "0.9", default-features = false }
 crossbeam-channel = "0.5"
-tts = { version = "0.24", default-features = false }
+tts = { version = "0.25", default-features = false }
 
 [dev-dependencies]
-bevy = { version = "0.8", default-features = true }
+bevy = { version = "0.9", default-features = true }
 
 [package.metadata.release]
 tag-prefix = ""

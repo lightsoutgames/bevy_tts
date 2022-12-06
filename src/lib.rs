@@ -1,6 +1,9 @@
 use bevy::prelude::*;
 use crossbeam_channel::{unbounded, Receiver};
-pub use tts::{Backends, Error, Features, Tts, UtteranceId};
+pub use tts::{Backends, Error, Features, UtteranceId};
+
+#[derive(Resource, Clone, Deref, DerefMut)]
+pub struct Tts(tts::Tts);
 
 #[derive(Debug)]
 pub enum TtsEvent {
@@ -9,6 +12,7 @@ pub enum TtsEvent {
     UtteranceStop(UtteranceId),
 }
 
+#[derive(Resource)]
 struct TtsChannel(Receiver<TtsEvent>);
 
 fn poll_callbacks(channel: Res<TtsChannel>, mut events: EventWriter<TtsEvent>) {
@@ -21,7 +25,7 @@ pub struct TtsPlugin;
 
 impl Plugin for TtsPlugin {
     fn build(&self, app: &mut App) {
-        let tts = Tts::default().unwrap();
+        let tts = tts::Tts::default().unwrap();
         let (tx, rx) = unbounded();
         let tx_begin = tx.clone();
         let tx_end = tx.clone();
@@ -44,6 +48,7 @@ impl Plugin for TtsPlugin {
             })))
             .unwrap();
         }
+        let tts = Tts(tts);
         app.add_event::<TtsEvent>()
             .insert_resource(TtsChannel(rx))
             .insert_resource(tts)
