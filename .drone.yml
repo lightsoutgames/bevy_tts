@@ -17,8 +17,6 @@ steps:
     image: rust
     pull: always
     commands:
-      - apt-get update -qq
-      - apt-get install -qqy llvm-dev libclang-dev clang libspeechd-dev pkg-config libx11-dev libasound2-dev libudev-dev libxcb-xfixes0-dev libwayland-dev libxkbcommon-dev libvulkan-dev libpulse-dev
       - cargo publish --no-verify
     when:
       ref:
