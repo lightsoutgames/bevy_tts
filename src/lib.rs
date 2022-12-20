@@ -5,6 +5,12 @@ pub use tts::{self, Backends, Error, Features, UtteranceId};
 #[derive(Resource, Clone, Deref, DerefMut)]
 pub struct Tts(tts::Tts);
 
+impl Tts {
+    pub fn screen_reader_available() -> bool {
+        tts::Tts::screen_reader_available()
+    }
+}
+
 #[derive(Debug)]
 pub enum TtsEvent {
     UtteranceBegin(UtteranceId),
