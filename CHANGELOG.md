@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## Version 0.2.1 - 2022-12-20
+
+### Features
+
+- Re-export top-level `tts` crate.
+
+### Miscellaneous Tasks
+
+- Always pull Rust image when building in CI.
+
 ## Version 0.2.0 - 2022-12-06
 
 ### Miscellaneous Tasks
