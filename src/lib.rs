@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 use crossbeam_channel::{unbounded, Receiver};
-pub use tts::{Backends, Error, Features, UtteranceId};
+pub use tts::{self, Backends, Error, Features, UtteranceId};
 
 #[derive(Resource, Clone, Deref, DerefMut)]
 pub struct Tts(tts::Tts);
