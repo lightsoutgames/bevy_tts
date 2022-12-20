@@ -3,7 +3,7 @@ use crossbeam_channel::{unbounded, Receiver};
 pub use tts::{self, Backends, Error, Features, UtteranceId};
 
 #[derive(Resource, Clone, Deref, DerefMut)]
-pub struct Tts(tts::Tts);
+pub struct Tts(pub tts::Tts);
 
 impl Tts {
     pub fn screen_reader_available() -> bool {
