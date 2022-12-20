@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Version 0.4.0 - 2022-12-20
+
+### Features
+
+- Make wrapped `Tts` instance public.
+
 ## Version 0.3.0 - 2022-12-20
 
 ### Features
