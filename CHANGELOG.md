@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Version 0.3.0 - 2022-12-20
+
+### Features
+
+- Add `Tts::screen_reader_available()` to `Tts` resource.
+
 ## Version 0.2.1 - 2022-12-20
 
 ### Features
