@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Version 0.5.0 - 2023-03-06
+
+### Miscellaneous Tasks
+
+- Update Bevy to 0.10.
+
 ## Version 0.4.0 - 2022-12-20
 
 ### Features
