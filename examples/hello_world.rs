@@ -3,12 +3,9 @@ use bevy_tts::*;
 
 fn main() {
     App::new()
-        .add_plugins(DefaultPlugins)
-        .add_plugin(bevy_tts::TtsPlugin)
-        .add_system(bevy::window::close_on_esc)
-        .add_startup_system(setup)
-        .add_system(event_poll)
-        .add_system(greet)
+        .add_plugins((DefaultPlugins, bevy_tts::TtsPlugin))
+        .add_systems(Startup, setup)
+        .add_systems(Update, (bevy::window::close_on_esc, event_poll, greet))
         .run();
 }
 

@@ -17,12 +17,12 @@ speech_dispatcher_0_11 = ["tts/speech_dispatcher_0_11"]
 tolk = ["tts/tolk"]
 
 [dependencies]
-bevy = { version = "0.10", default-features = false }
+bevy = { version = "0.11", default-features = false }
 crossbeam-channel = "0.5"
 tts = { version = "0.25", default-features = false }
 
 [dev-dependencies]
-bevy = { version = "0.10", default-features = true }
+bevy = { version = "0.11", default-features = true }
 
 [package.metadata.release]
 publish = false

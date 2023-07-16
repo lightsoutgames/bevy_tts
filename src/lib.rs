@@ -11,7 +11,7 @@ impl Tts {
     }
 }
 
-#[derive(Debug)]
+#[derive(Event, Debug)]
 pub enum TtsEvent {
     UtteranceBegin(UtteranceId),
     UtteranceEnd(UtteranceId),
@@ -58,6 +58,6 @@ impl Plugin for TtsPlugin {
         app.add_event::<TtsEvent>()
             .insert_resource(TtsChannel(rx))
             .insert_resource(tts)
-            .add_system(poll_callbacks);
+            .add_systems(Update, poll_callbacks);
     }
 }
