@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Version 0.6.0 - 2023-07-16
+
+### Miscellaneous Tasks
+
+- Update to Bevy 0.11.
+
 ## Version 0.5.0 - 2023-03-06
 
 ### Miscellaneous Tasks
