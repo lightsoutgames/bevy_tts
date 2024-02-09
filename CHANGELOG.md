@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Version 0.7.0 - 2024-02-09
+
+### Miscellaneous Tasks
+
+- Bump dependencies.
+
 ## Version 0.6.0 - 2023-07-16
 
 ### Miscellaneous Tasks
