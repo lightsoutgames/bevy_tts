@@ -29,9 +29,7 @@ jobs:
           toolchain: stable
           components: rustfmt, clippy
       - name: install Linux build dependencies
-        run: sudo apt-get update; sudo apt-get install -y
-        --no-install-recommends libasound2-dev libudev-dev libwayland-dev
-        libclang-dev libspeechd-dev
+        run: sudo apt-get update; sudo apt-get install -y --no-install-recommends libasound2-dev libudev-dev libwayland-dev libclang-dev libspeechd-dev
         if: runner.os == 'linux'
       - uses: actions/setup-python@v3
       - uses: pre-commit/action@v3.0.1
