@@ -1,0 +1,39 @@
+name: Test
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        # os: [windows-latest, ubuntu-latest, macos-latest]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit|${{ env.PY }}|${{ hashFiles('.pre-commit-config.yaml') }}
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+          components: rustfmt, clippy
+      - name: install Linux build dependencies
+        run: sudo apt-get update; sudo apt-get install -y
+        --no-install-recommends libasound2-dev libudev-dev libwayland-dev
+        libclang-dev libspeechd-dev
+        if: runner.os == 'linux'
+      - uses: actions/setup-python@v3
+      - uses: pre-commit/action@v3.0.1
