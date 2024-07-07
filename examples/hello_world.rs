@@ -5,7 +5,7 @@ fn main() {
     App::new()
         .add_plugins((DefaultPlugins, bevy_tts::TtsPlugin))
         .add_systems(Startup, setup)
-        .add_systems(Update, (bevy::window::close_on_esc, event_poll, greet))
+        .add_systems(Update, (event_poll, greet))
         .run();
 }
 
@@ -61,14 +61,14 @@ fn setup(mut tts: ResMut<Tts>) {
 
 // Reports events from TTS subsystem.
 fn event_poll(mut events: EventReader<TtsEvent>) {
-    for event in events.iter() {
+    for event in events.read() {
         println!("{:?}", event);
     }
 }
 
 // Shows how to output speech in response to a keypress.
-fn greet(input: Res<Input<KeyCode>>, mut tts: ResMut<Tts>) {
-    if input.just_pressed(KeyCode::G) {
+fn greet(input: Res<ButtonInput<KeyCode>>, mut tts: ResMut<Tts>) {
+    if input.just_pressed(KeyCode::KeyG) {
         tts.speak("Hey there!", true).unwrap();
     }
 }
