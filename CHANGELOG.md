@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## Version 0.9.0 - 2024-07-07
+
+### Miscellaneous Tasks
+
+- Switch to Gitea Actions.
+- Integrate pre-commit.
+- Update to Bevy 0.14.
+
 ## Version 0.8.0 - 2024-03-14
 
 ### Miscellaneous Tasks
