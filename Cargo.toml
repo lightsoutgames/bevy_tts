@@ -1,6 +1,6 @@
 [package]
 name = "bevy_tts"
-version = "0.9.0"
+version = "0.10.0"
 description = "Text-to-speech for the Bevy game engine"
 repository = "https://labs.lightsout.games/projects/bevy_tts"
 authors = ["Nolan Darilek <nolan@thewordnerd.info>"]
