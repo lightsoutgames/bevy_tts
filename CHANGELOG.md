@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## Version 0.10.0 - 2024-12-05
+
+### Features
+
+- `Tts` can now be used as a component, and multiple TTS instances are supported.
+
+### Miscellaneous Tasks
+
+- Upgrade to Bevy 0.15.
+
 ## Version 0.9.0 - 2024-07-07
 
 ### Miscellaneous Tasks
