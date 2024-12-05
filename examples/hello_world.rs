@@ -6,11 +6,22 @@ fn main() {
         .add_plugins((DefaultPlugins, bevy_tts::TtsPlugin))
         .add_systems(Startup, setup)
         .add_systems(Update, (event_poll, greet))
+        .add_observer(|trigger: Trigger<TtsEvent>| {
+            println!("{:?}", trigger.event());
+        })
         .run();
 }
 
 // Speaks a bunch of messages and changes TTS properties.
-fn setup(mut tts: ResMut<Tts>) {
+fn setup(mut commands: Commands, mut tts: ResMut<Tts>) {
+    let mut other_tts = Tts::default();
+    let Features { voice, .. } = other_tts.supported_features();
+    if voice {
+        let voices = other_tts.voices().unwrap();
+        let v = voices.last().unwrap();
+        other_tts.set_voice(&v.clone()).unwrap();
+    }
+    commands.spawn(other_tts);
     tts.speak("Hello, world.", false).unwrap();
     let Features { rate, .. } = tts.supported_features();
     if rate {
@@ -57,6 +68,11 @@ fn setup(mut tts: ResMut<Tts>) {
         tts.set_volume(original_volume).unwrap();
     }
     tts.speak("Press G for a greeting.", false).unwrap();
+    tts.speak(
+        "Press S to speak with a second voice, if you're lucky.",
+        false,
+    )
+    .unwrap();
 }
 
 // Reports events from TTS subsystem.
@@ -67,8 +83,15 @@ fn event_poll(mut events: EventReader<TtsEvent>) {
 }
 
 // Shows how to output speech in response to a keypress.
-fn greet(input: Res<ButtonInput<KeyCode>>, mut tts: ResMut<Tts>) {
+fn greet(input: Res<ButtonInput<KeyCode>>, mut tts: ResMut<Tts>, mut speaker: Query<&mut Tts>) {
     if input.just_pressed(KeyCode::KeyG) {
         tts.speak("Hey there!", true).unwrap();
+    }
+    if input.just_pressed(KeyCode::KeyS) {
+        if let Ok(mut speaker) = speaker.get_single_mut() {
+            speaker
+                .speak("Hey there from the TTS component!", true)
+                .unwrap();
+        }
     }
 }
