@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous Tasks
 
 - Add Nix-based build and CI configuration.
-- Update to Bevy 016.
+- Update to Bevy 0.16.
 
 ## Version 0.10.0 - 2024-12-05
 
