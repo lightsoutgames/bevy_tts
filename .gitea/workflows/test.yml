@@ -26,12 +26,9 @@ jobs:
             ~/.cargo/git/db/
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - uses: dtolnay/rust-toolchain@master
-        with:
-          toolchain: stable
-          components: rustfmt, clippy
-      - name: install Linux build dependencies
-        run: sudo apt-get update; sudo apt-get install -y --no-install-recommends libasound2-dev libudev-dev libwayland-dev libclang-dev libspeechd-dev
+      - name: Install Nix
+        uses: https://github.com/cachix/install-nix-action@v31
         if: runner.os == 'linux'
-      - uses: actions/setup-python@v3
-      - uses: pre-commit/action@v3.0.1
+      - name: Test
+        run: nix develop --command pre-commit run -a
+        if: runner.os == 'linux'
