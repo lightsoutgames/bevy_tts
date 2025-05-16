@@ -1,5 +1,5 @@
 use bevy::{
-    ecs::{component::ComponentId, world::DeferredWorld},
+    ecs::{component::HookContext, world::DeferredWorld},
     prelude::*,
 };
 use crossbeam_channel::{unbounded, Receiver};
@@ -31,13 +31,13 @@ pub enum TtsEvent {
 #[derive(Component, Resource)]
 struct TtsChannel(Receiver<TtsEvent>);
 
-fn on_tts_added(mut world: DeferredWorld, entity: Entity, _: ComponentId) {
+fn on_tts_added(mut world: DeferredWorld, HookContext { entity, .. }: HookContext) {
     let tts = &world.get::<Tts>(entity).unwrap();
     let channel = setup_tts(tts);
     world.commands().entity(entity).insert(channel);
 }
 
-fn on_tts_removed(mut world: DeferredWorld, entity: Entity, _: ComponentId) {
+fn on_tts_removed(mut world: DeferredWorld, HookContext { entity, .. }: HookContext) {
     world.commands().entity(entity).remove::<TtsChannel>();
 }
 
@@ -48,7 +48,7 @@ fn poll_callbacks(
     speakers: Query<(Entity, &TtsChannel), With<Tts>>,
 ) {
     if let Ok(msg) = channel.0.try_recv() {
-        events.send(msg);
+        events.write(msg);
     }
     for (entity, channel) in &speakers {
         if let Ok(msg) = channel.0.try_recv() {

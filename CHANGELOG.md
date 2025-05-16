@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## Version 0.11.0 - 2025-05-16
+
+### Miscellaneous Tasks
+
+- Add Nix-based build and CI configuration.
+- Update to Bevy 016.
+
 ## Version 0.10.0 - 2024-12-05
 
 ### Features

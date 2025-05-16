@@ -2,7 +2,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     utils.url = "github:numtide/flake-utils";
-    naersk.url = "github:nix-community/naersk/master";
   };
 
   outputs =
@@ -10,13 +9,11 @@
       self,
       nixpkgs,
       utils,
-      naersk,
     }:
     utils.lib.eachDefaultSystem (
       system:
       let
         pkgs = import nixpkgs { inherit system; };
-        naersk-lib = pkgs.callPackage naersk { };
       in
       {
         devShell =
@@ -30,6 +27,8 @@
               pkg-config
               pre-commit
               git-cliff
+              cargo-release
+              cargo-outdated
             ];
             buildInputs = [
               speechd

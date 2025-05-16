@@ -83,15 +83,19 @@ fn event_poll(mut events: EventReader<TtsEvent>) {
 }
 
 // Shows how to output speech in response to a keypress.
-fn greet(input: Res<ButtonInput<KeyCode>>, mut tts: ResMut<Tts>, mut speaker: Query<&mut Tts>) {
+fn greet(
+    input: Res<ButtonInput<KeyCode>>,
+    mut tts: ResMut<Tts>,
+    mut speaker: Query<&mut Tts>,
+) -> Result {
     if input.just_pressed(KeyCode::KeyG) {
         tts.speak("Hey there!", true).unwrap();
     }
     if input.just_pressed(KeyCode::KeyS) {
-        if let Ok(mut speaker) = speaker.get_single_mut() {
-            speaker
-                .speak("Hey there from the TTS component!", true)
-                .unwrap();
-        }
+        let mut speaker = speaker.single_mut()?;
+        speaker
+            .speak("Hey there from the TTS component!", true)
+            .unwrap();
     }
+    Ok(())
 }
